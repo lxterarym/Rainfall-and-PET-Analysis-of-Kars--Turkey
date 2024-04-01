@@ -1,0 +1,24 @@
+# getting extend of the city from QGIS 
+
+43.7439, 41.0942 : 42.1273, 39.9289
+
+# simplify the lat lon values (only two dec. digits are enough as below)
+
+# trimming pre and pet data 
+
+cdo sellonlatbox,43.50,41.00,42.00,40.00 pre_TR.nc kars_pre.nc
+cdo sellonlatbox,43.50,41.00,42.00,40.00 pet_TR.nc kars_pet.nc
+
+#getting monthly total time series for trend analysis 
+(kars_pre.nc is the output of previous step and kars_pre.nc is input now)
+
+cdo monsum kars_pre.nc monsum_pre.nc
+cdo fldmean monsum_pre.nc preTimeSeries.nc
+
+cdo monsum kars_pet.nc monsum_pet.nc
+cdo fldmean monsum_pet.nc petTimeSeries.nc
+
+# 12 values for Thornthwaite-Mather Water Balance Graph 
+
+cdo ymonsum kars_pre.nc ymonsum_pre.nc
+cdo ymonsum kars_pet.nc ymonsum_pet.nc
